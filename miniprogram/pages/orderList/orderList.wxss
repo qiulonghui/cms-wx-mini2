@@ -1,0 +1,30 @@
+/**index.wxss**/
+
+page {
+}
+.list{
+  margin: 20rpx 0;
+  padding-bottom: 2rpx;
+}
+.top {
+  display: flex;
+  padding-left: 32rpx;
+}
+.card{
+  background-color: #fff;
+  margin: 0 28rpx;
+  padding: 20rpx 30rpx;
+  font-size: 14px;
+  border-radius: 6px;
+  margin-bottom: 24rpx;
+}
+.card .fir-row{
+  display: flex;
+  justify-content: space-between;
+}
+.cont{
+  padding-top: 12rpx;
+}
+.oth-row{
+  margin-top: 10rpx;
+}
