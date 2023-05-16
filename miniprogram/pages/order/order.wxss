@@ -1,1 +1,10 @@
 /* pages/order/order.wxss */
+.container{
+  padding: 28rpx;
+}
+.van-textarea{
+  min-height: 100px !important;
+}
+.btn{
+  margin-top: 40rpx;
+}

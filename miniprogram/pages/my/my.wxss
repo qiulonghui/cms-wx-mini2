@@ -1,1 +1,28 @@
-/* pages/my/my.wxss */
+.main{
+  background-color: #FFF;
+  padding-top: 1px;
+  padding-bottom: 40rpx;
+}
+.avatar-wrapper {
+  padding: 0;
+  width: 56px !important;
+  border-radius: 8px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  display: block;
+  width: 56px;
+  height: 56px;
+}
+
+.name-input{
+  width: 300rpx;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.feat-list{
+  margin-top: 32rpx;
+}

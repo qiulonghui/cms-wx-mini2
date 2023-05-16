@@ -1,3 +1,14 @@
 <view class="container">
-  <van-nav-bar title="新建报修" bind:click-left="onClickVantBack" left-arrow fixed placeholder></van-nav-bar>
+  <van-nav-bar title="{{pageTitle}}" bind:click-left="onClickVantBack" left-arrow fixed placeholder></van-nav-bar>
+  <van-cell-group>
+    <van-field model:value="{{ name }}" required clearable label="报修人" placeholder="请输入" />
+    <van-field model:value="{{ phone }}" type="phone" label="报修人电话" placeholder="请输入" required />
+    <van-field model:value="{{ depart }}" label="报修科室" placeholder="请输入" required />
+    <van-field model:value="{{ address }}" label="维修地点" placeholder="请输入" required />
+    <van-field input-class="van-textarea" model:value="{{ desc }}" type="textarea" label="问题说明" placeholder="请输入" required />
+  </van-cell-group>
+
+  <van-button custom-class="btn" block round bind:tap="onClickSaveBtn" type="primary">保存</van-button>
+  <van-toast id="van-toast" />
+
 </view>
