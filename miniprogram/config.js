@@ -1,6 +1,6 @@
 
 const config = {
-  api_base_url: 'https://2h94609x15.imdo.co/',
+  api_base_url: 'http://127.0.0.1:6001/',
 }
 
 

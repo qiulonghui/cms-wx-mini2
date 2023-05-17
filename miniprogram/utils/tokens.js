@@ -3,7 +3,6 @@ import {
 } from '../config.js'
 
 function getTokenFromServer(callBack) {
-
   var that = this;
   wx.login({
     success: function(res) {
@@ -14,10 +13,17 @@ function getTokenFromServer(callBack) {
           code: res.code
         },
         success: function(res) {
+          if(res.data.code){
+            wx.showToast({
+              title: res.data.message,
+              icon: 'none',
+              duration: 2000
+            })
+            return 
+          }
           wx.setStorageSync('access_token', 'Bearer ' + res.data.access_token);
           wx.setStorageSync('refresh_token', 'Bearer ' + res.data.refresh_token);
 
-          console.log(res)
           callBack && callBack(res.data.token);
         }
       })

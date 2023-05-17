@@ -1,36 +1,34 @@
-import {
-  HTTP
-} from '../../utils/http-p'
+import { HTTP } from '../../utils/http-p'
 const http = new HTTP()
 Page({
   data: {
-    orderList: [1, 2, 3, 4, 5]
+    orderList: []
   },
   onLoad(options) {
-    http.request({
+    this.getOrderList()
+  },
+  async getOrderList() {
+    const {items} = await http.request({
       url: 'v1/orderRepair',
       data: {
         page: 1,
-        count: 10
+        count: 5
       }
+    })
+    this.setData({
+      orderList: items
     })
   },
+
   toCreateOrder() {
-    http.request({
-      url: 'v1/orderRepair',
-      data: {
-        page: 1,
-        count: 10
-      }
-    })
-    return
     wx.navigateTo({
       url: '/pages/order/order?action=create'
     })
   },
-  onClickCard() {
+  onClickCard(event) {
+    const id=event.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/order/order?id=1&action=edit'
+      url: `/pages/order/order?id=${id}&action=edit`
     })
   }
 });

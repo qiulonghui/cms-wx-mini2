@@ -4,22 +4,33 @@
     <van-icon bind:tap="toCreateOrder" name="add-o" size="24px" slot="left" />
   </van-nav-bar>
   <view class="list">
-    <view class="card"  wx:for="{{orderList}}"  wx:key="item" bind:tap="onClickCard"> 
+    <view class="card"  wx:for="{{orderList}}"  wx:key="item" bind:tap="onClickCard" data-id="{{item.id}}"> 
       <view class="fir-row">
+        <view>{{item.createTime}}</view>
         <view>
-          2022-08-16 12:32:00
-        </view>
-        <view>
-          <van-tag round type="success">待处理</van-tag>
+          <van-tag round type="success">{{tool.stateTxt(item.state)}}</van-tag>
         </view>
       </view>
       <view class="cont">
-        <view class="oth-row">报修人： {{'asdasda'}}</view>
-        <view class="oth-row">报修科室： {{'asdasdasd'}}</view>
-        <view class="oth-row van-ellipsis">问题说明： {{'asdasdasd'}}</view>
+        <view class="oth-row">报修人： {{item.name}}</view>
+        <view class="oth-row">报修科室： {{item.depart}}</view>
+        <view class="oth-row van-ellipsis">问题说明： {{item.desc}}</view>
       </view>
     </view>
   </view>
-
-
 </view>
+
+<wxs module="tool">
+   function stateTxt(value) {
+    var map={
+      pending:"待处理",
+      processing:"处理中",
+      completed:"已完工"
+    }
+    return map[value]
+  }
+
+    module.exports = {
+      stateTxt:stateTxt
+    }
+</wxs>

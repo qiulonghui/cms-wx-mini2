@@ -9,13 +9,10 @@ import {
 
 
 function refreshTokenException(code) {
-  const codes = [10000, 10042, 10050, 10052, 10012,10013]
+  const codes = [10000, 10042, 10050, 10052, 10012, 10013]
   return codes.includes(code)
 }
 
-const tips = {
-  1: '抱歉，出现了一个错误'
-}
 // # 解构
 class HTTP {
   request({
@@ -33,7 +30,7 @@ class HTTP {
   // 自动 无感知帮助他重新刷新令牌
   // 退出 短时间 二次重发机制
   _request(url, resolve, reject, data = {}, method = 'GET', noRefetch = false) {
-    const access_token =  wx.getStorageSync('access_token')
+    const access_token = wx.getStorageSync('access_token')
     wx.request({
       url: config.api_base_url + url,
       method: method,
@@ -48,11 +45,11 @@ class HTTP {
           resolve(res.data)
         } else {
           console.log(res)
-          const data = res.data
-          const code = data.code
+          const code = res.data.code
           console.log(code)
 
           if (code === 10041 || code === 10051) {
+            // accessToken过期刷新token
             if (!noRefetch) {
               this._refetch(
                 url,
@@ -62,12 +59,19 @@ class HTTP {
                 method
               )
             }
-          }else if(refreshTokenException(code)) {
-            console.log(1111)
-
-            getTokenFromServer()
+          } else if (refreshTokenException(code)) {
+            // refreshToken过期重新获取token及refreshToken
+            getTokenFromServer(() => {
+              this._request(
+                url,
+                resolve,
+                reject,
+                data,
+                method,
+                true
+              );
+            })
           } else {
-            console.log(2222)
             reject()
             const msg = res.data.message
             this._show_error(msg)
@@ -96,7 +100,6 @@ class HTTP {
       this._request(...param, true);
     });
   }
-
 }
 
 export {

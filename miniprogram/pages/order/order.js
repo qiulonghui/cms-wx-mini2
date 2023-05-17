@@ -1,6 +1,8 @@
 // pages/order/order.js
 import Toast from '@vant/weapp/toast/toast';
-const app = getApp()
+import { HTTP } from '../../utils/http-p'
+const http = new HTTP()
+
 Page({
   data: {
     id: null,
@@ -24,8 +26,22 @@ Page({
     this.setData({
       pageTitle: title
     })
+    this.getOrder()
   },
 
+  async getOrder() {
+   const result = await http.request({
+      url: `v1/orderRepair/${this.data.id}`,
+    })
+    const {name,phone,depart,address,desc} = result
+    this.setData({
+      name,
+      phone,
+      depart,
+      address,
+      desc
+    })
+  },
   onClickVantBack() {
     wx.navigateBack()
   },
