@@ -9,7 +9,7 @@ import {
 
 
 function refreshTokenException(code) {
-  const codes = [10000, 10042, 10050, 10052, 10012, 10013]
+  const codes = [10000,10100, 10042, 10050, 10052, 10012, 10013]
   return codes.includes(code)
 }
 
@@ -72,9 +72,19 @@ class HTTP {
               );
             })
           } else {
-            reject()
+            let tipMessage = ''
             const msg = res.data.message
-            this._show_error(msg)
+            if (typeof msg === 'string') {
+              tipMessage = msg
+            }
+            if (Object.prototype.toString.call(msg) === '[object Object]') {
+              ;[tipMessage] = Object.values(msg).flat()
+            }
+            if (Object.prototype.toString.call(msg) === '[object Array]') {
+              ;[tipMessage] = msg
+            }
+            this._show_error(tipMessage)
+            reject(tipMessage)
           }
         }
       },

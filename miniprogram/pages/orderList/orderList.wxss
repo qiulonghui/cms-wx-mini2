@@ -2,6 +2,15 @@
 
 page {
 }
+.container{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.s-view{
+  flex:1;
+  overflow: hidden;
+}
 .list{
   margin: 20rpx 0;
   padding-bottom: 2rpx;
@@ -18,6 +27,9 @@ page {
   border-radius: 6px;
   margin-bottom: 24rpx;
 }
+/* .card:last-of-type{
+  margin-bottom: 0;
+} */
 .card .fir-row{
   display: flex;
   justify-content: space-between;

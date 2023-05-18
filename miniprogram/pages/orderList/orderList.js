@@ -2,22 +2,82 @@ import { HTTP } from '../../utils/http-p'
 const http = new HTTP()
 Page({
   data: {
-    orderList: []
+    page:1,
+    orderList: [],
+    triggered: false
   },
   onLoad(options) {
     this.getOrderList()
   },
+  onShow() {},
+  onScrollBottom() {
+    console.log("触底");
+    this.getOrderList()
+  },
+
   async getOrderList() {
+    wx.showLoading({
+      title: '加载中',
+    })
+    const {items} = await http.request({
+      url: 'v1/orderRepair',
+      data: {
+        page: this.data.page,
+        count: 10
+      }
+    })
+    wx.hideLoading()
+    if(items.length>0){
+      this.setData({
+        orderList: [...this.data.orderList,...items]
+      })
+      this.data.page++
+    }else{
+      wx.showToast({
+        title: '没有更多数据了',
+        icon:'none',
+        duration: 2000
+      })
+    }
+  },
+
+  onPulling(e) {
+    // console.log('onPulling:', e)
+  },
+
+  async onRefresh(successTip = true) {
+    if (this._freshing) return
+    this._freshing = true
+    console.log("触发下拉");
+    this.data.page = 1
     const {items} = await http.request({
       url: 'v1/orderRepair',
       data: {
         page: 1,
-        count: 5
+        count: 10
       }
     })
+
+    this._freshing = false
     this.setData({
+      triggered: false,
       orderList: items
     })
+    if(successTip) {
+      wx.showToast({
+        title: '数据刷新成功',
+        icon:'success',
+        duration: 2000
+      })
+    }
+  },
+
+  onRestore(e) {
+    console.log('onRestore:', e)
+  },
+
+  onAbort(e) {
+    console.log('onAbort', e)
   },
 
   toCreateOrder() {
