@@ -2,12 +2,13 @@ import { HTTP } from '../../utils/http-p'
 const http = new HTTP()
 Page({
   data: {
+    loaded:false,
     page:1,
     orderList: [],
     triggered: false
   },
-  onLoad(options) {
-    this.getOrderList()
+  onLoad() {
+    this.getOrderList(false)
   },
   onShow() {},
   onScrollBottom() {
@@ -15,16 +16,19 @@ Page({
     this.getOrderList()
   },
 
-  async getOrderList() {
+  async getOrderList(tip=true) {
     wx.showLoading({
       title: '加载中',
     })
     const {items} = await http.request({
-      url: 'v1/orderRepair',
+      url: 'v1/orderRepair/own',
       data: {
         page: this.data.page,
         count: 10
       }
+    })
+    this.setData({
+      loaded:true
     })
     wx.hideLoading()
     if(items.length>0){
@@ -33,11 +37,13 @@ Page({
       })
       this.data.page++
     }else{
-      wx.showToast({
-        title: '没有更多数据了',
-        icon:'none',
-        duration: 2000
-      })
+      if(tip) {
+        wx.showToast({
+          title: '没有更多数据了',
+          icon:'none',
+          duration: 2000
+        })
+      }
     }
   },
 
@@ -51,13 +57,15 @@ Page({
     console.log("触发下拉");
     this.data.page = 1
     const {items} = await http.request({
-      url: 'v1/orderRepair',
+      url: 'v1/orderRepair/own',
       data: {
         page: 1,
         count: 10
       }
     })
-
+    this.setData({
+      loaded:true
+    })
     this._freshing = false
     this.setData({
       triggered: false,

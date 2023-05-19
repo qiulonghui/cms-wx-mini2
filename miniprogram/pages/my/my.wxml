@@ -6,7 +6,7 @@
     </button>
     <input class="name-input" type="nickname" model:value="{{ name }}" placeholder="请输入昵称" />
   </view>
-  <view class="feat-list">
+  <!-- <view class="feat-list">
     <van-cell is-link title="绑定账号" link-type="navigateTo" url="/pages/dashboard/index" />
-  </view>
+  </view> -->
 </view>

@@ -3,7 +3,12 @@
   <van-nav-bar title="报修工单" fixed placeholder>
     <van-icon bind:tap="toCreateOrder" name="add-o" size="24px" slot="left" />
   </van-nav-bar>
+  <view class="empty-data-wrap" wx:if="{{loaded && orderList.length===0}}"
+>
+    <van-empty image="https://img.yzcdn.cn/vant/custom-empty-image.png" description="暂无数据" />
+  </view>
   <scroll-view
+    wx:else
     class="s-view"
     scroll-y style="width: 100%;"
     refresher-enabled="{{true}}"
@@ -32,19 +37,20 @@
         </view>
     </view>
   </scroll-view>
+
 </view>
 
 <wxs module="tool">
-   function stateTxt(value) {
-    var map={
-      pending:"待处理",
-      processing:"处理中",
-      completed:"已完工"
+  function stateTxt(value) {
+    var map = {
+      pending: "待处理",
+      processing: "处理中",
+      completed: "已完工"
     }
     return map[value]
   }
 
-    module.exports = {
-      stateTxt:stateTxt
-    }
+  module.exports = {
+    stateTxt: stateTxt
+  }
 </wxs>
