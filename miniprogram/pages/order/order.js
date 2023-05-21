@@ -12,7 +12,8 @@ Page({
     phone: "",
     depart: "",
     address: "",
-    desc: ""
+    desc: "",
+    checked: true,
   },
   onLoad(options) {
     this.data.id = options.id
@@ -111,5 +112,10 @@ Page({
       method= 'put'
     }
     this.handleOrder(id,data,method)
+  },
+  onChange(event) {
+    this.setData({
+      checked:event.detail
+    })
   }
 })

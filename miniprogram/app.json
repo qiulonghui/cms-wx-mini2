@@ -3,7 +3,8 @@
     "pages/orderList/orderList",
     "pages/order/order",
     "pages/my/my",
-    "pages/test/test"
+    "pages/test/test",
+    "pages/userAgreement/userAgreement"
   ],
   "usingComponents": {
     "van-button": "@vant/weapp/button/index",
@@ -13,7 +14,8 @@
     "van-field": "@vant/weapp/field/index",
     "van-toast": "@vant/weapp/toast/index",
     "van-cell": "@vant/weapp/cell/index",
-    "van-empty": "@vant/weapp/empty/index"
+    "van-empty": "@vant/weapp/empty/index",
+    "van-checkbox": "@vant/weapp/checkbox/index"
   },
   "window": {
     "backgroundColor": "#F6F6F6",

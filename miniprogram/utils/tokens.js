@@ -24,7 +24,7 @@ function getTokenFromServer(callBack) {
           wx.setStorageSync('access_token', 'Bearer ' + res.data.access_token);
           wx.setStorageSync('refresh_token', 'Bearer ' + res.data.refresh_token);
 
-          callBack && callBack(res.data.token);
+          callBack && callBack();
         }
       })
     }
@@ -48,11 +48,17 @@ function refreshTokenFromServer(callBack) {
         wx.setStorageSync('access_token', 'Bearer ' + res.data.access_token);
         callBack && callBack(res.data.token);
       }else{
-        wx.showToast({
-          title: res.data.message,
-          icon: 'none',
-          duration: 2000
-        })
+        const code = res.data.code
+        if(code === 10100) {
+          //刷新令牌获取失败
+          getTokenFromServer(callBack)
+        }else{
+          wx.showToast({
+            title: res.data.message,
+            icon: 'none',
+            duration: 2000
+          })
+        }
       }
     }
   })

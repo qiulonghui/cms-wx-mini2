@@ -8,3 +8,7 @@
 .btn{
   margin-top: 40rpx;
 }
+.agwrap{
+  margin-top: 40rpx;
+  font-size: 16px;
+}

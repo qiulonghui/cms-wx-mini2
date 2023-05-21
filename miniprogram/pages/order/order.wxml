@@ -8,6 +8,10 @@
     <van-field input-class="van-textarea" model:value="{{ desc }}" type="textarea" label="问题说明" placeholder="请输入" required />
   </van-cell-group>
 
+  <view class="agwrap">
+    <van-checkbox value="{{ checked }}"   checked-color="#07c160" bind:change="onChange"
+>《用户服务协议》及《隐私政策》</van-checkbox>
+  </view>
   <van-button custom-class="btn" block round bind:tap="onClickSaveBtn" type="primary">保存</van-button>
   <van-toast id="van-toast" />
 
