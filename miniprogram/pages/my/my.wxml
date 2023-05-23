@@ -4,7 +4,7 @@
     <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
       <image class="avatar" src="{{avatarUrl}}"></image>
     </button>
-    <input class="name-input" type="nickname" model:value="{{ name }}" placeholder="请输入昵称" />
+    <input class="name-input" type="nickname" value="{{ name }}" bindchange="onChange" bindinput="onInput" placeholder="请输入昵称" />
   </view>
   <!-- <view class="feat-list">
     <van-cell is-link title="绑定账号" link-type="navigateTo" url="/pages/dashboard/index" />

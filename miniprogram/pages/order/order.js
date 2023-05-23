@@ -87,6 +87,10 @@ Page({
     
   },
   async onClickSaveBtn() {
+    if(!this.data.checked) {
+      Toast('请勾选用户服务及隐私政策');
+      return
+    }
     const name = this.data.name.trim()
     const phone = this.data.phone.trim()
     const depart = this.data.depart.trim()

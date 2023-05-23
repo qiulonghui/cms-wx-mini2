@@ -10,7 +10,8 @@
 
   <view class="agwrap">
     <van-checkbox value="{{ checked }}"   checked-color="#07c160" bind:change="onChange"
->《用户服务协议》及《隐私政策》</van-checkbox>
+></van-checkbox>
+    <navigator url="/pages/userAgreement/userAgreement" hover-class="navigator-hover">《用户服务协议及隐私政策》</navigator>
   </view>
   <van-button custom-class="btn" block round bind:tap="onClickSaveBtn" type="primary">保存</van-button>
   <van-toast id="van-toast" />

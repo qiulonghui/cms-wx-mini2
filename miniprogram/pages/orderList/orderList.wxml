@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <van-nav-bar title="报修工单" fixed placeholder>
-    <van-icon bind:tap="toCreateOrder" name="add-o" size="24px" slot="left" />
+    <van-icon bind:tap="toCreateOrder" name="add-o" size="24px" slot="{{env==='prod'?'left':''}}" />
   </van-nav-bar>
   <view class="empty-data-wrap" wx:if="{{loaded && orderList.length===0}}"
 >

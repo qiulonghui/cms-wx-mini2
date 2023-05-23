@@ -1,13 +1,19 @@
 import { HTTP } from '../../utils/http-p'
 const http = new HTTP()
+const  app = getApp()
+
 Page({
   data: {
+    env:'dev',
     loaded:false,
     page:1,
     orderList: [],
-    triggered: false
+    triggered: false,
   },
   onLoad() {
+    this.setData({
+      env: app.globalData.env
+    })
     this.getOrderList(false)
   },
   onShow() {},
@@ -94,9 +100,12 @@ Page({
     })
   },
   onClickCard(event) {
+    console.log(this.data.env)
+    if(this.data.env==='dev') return
     const id=event.currentTarget.dataset.id;
     wx.navigateTo({
       url: `/pages/order/order?id=${id}&action=edit`
     })
   }
+
 });

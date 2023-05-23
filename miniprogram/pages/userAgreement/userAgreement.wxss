@@ -1,1 +1,4 @@
 /* pages/userAgreement/userAgreement.wxss */
+.text-box{
+  padding: 20rpx 28rpx;
+}

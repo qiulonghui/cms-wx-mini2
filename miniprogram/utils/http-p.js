@@ -18,7 +18,8 @@ class HTTP {
   request({
     url,
     data = {},
-    method = 'GET'
+    method = 'GET',
+    header
   }) {
     return new Promise((resolve, reject) => {
       this._request(url, resolve, reject, data, method)
