@@ -77,6 +77,7 @@ Page({
       triggered: false,
       orderList: items
     })
+    this.data.page++
     if(successTip) {
       wx.showToast({
         title: '数据刷新成功',
