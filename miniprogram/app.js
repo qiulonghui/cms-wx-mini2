@@ -34,7 +34,7 @@ App({
   },
   async getUserInfo() {
     const result = await http.request({
-      url: 'cms/user/permissions',
+      url: 'cms/user/information',
     })
     this.globalData.userInfo= result
   },
